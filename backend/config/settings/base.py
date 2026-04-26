@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     "apps.categories",
     "apps.expenses",
     "apps.transactions",
+    "apps.ai_agent",
 ]
 
 TEMPLATES = [
@@ -111,6 +112,9 @@ DATABASES = {
 
 # CORS (override in development/production)
 CORS_ALLOWED_ORIGINS = []
+
+# AI Agent
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")
 
 # Logging
 LOGGING = {

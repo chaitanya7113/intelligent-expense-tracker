@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard'
 import AddExpense from './pages/AddExpense'
 import ExpenseList from './pages/ExpenseList'
 import Analytics from './pages/Analytics'
+import AIAgent from './pages/AIAgent'
 
 function PrivateRoute({ children }) {
   const { isAuthenticated, loading } = useAuth()
@@ -32,6 +33,7 @@ export default function App() {
         <Route path="expenses" element={<ExpenseList />} />
         <Route path="expenses/add" element={<AddExpense />} />
         <Route path="analytics" element={<Analytics />} />
+        <Route path="ai-agent" element={<AIAgent />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
