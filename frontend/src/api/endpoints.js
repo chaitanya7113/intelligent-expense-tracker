@@ -29,3 +29,7 @@ export const statements = {
     headers: { 'Content-Type': 'multipart/form-data' },
   }),
 }
+
+export const agent = {
+  chat: (data) => client.post('/api/ai/chat/', data),
+}

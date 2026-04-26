@@ -45,6 +45,10 @@ export default function Dashboard() {
           <Link to="/analytics" className="btn btn-ghost" style={{ display: 'inline-block' }}>Analytics</Link>
           <p style={{ marginTop: '0.75rem', color: 'var(--text-muted)', fontSize: '0.9rem' }}>Charts and breakdown</p>
         </div>
+        <div className="card">
+          <Link to="/ai-agent" className="btn btn-primary" style={{ display: 'inline-block' }}>AI Agent</Link>
+          <p style={{ marginTop: '0.75rem', color: 'var(--text-muted)', fontSize: '0.9rem' }}>Ask questions about your spending</p>
+        </div>
       </div>
     </div>
   )
