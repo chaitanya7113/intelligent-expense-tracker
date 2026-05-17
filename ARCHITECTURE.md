@@ -1,8 +1,8 @@
-# Intelligent Expense Tracker — Architecture
+# PocketLens Expense Tracker — Architecture
 
 ## System Overview
 
-The **Intelligent Expense Tracker** is a full-stack application that lets users track expenses, upload bank statements (CSV), and view analytics. The backend is Django REST with JWT auth and PostgreSQL; the frontend is React (Vite) with charts and JWT in localStorage.
+The **PocketLens Expense Tracker** is a full-stack application that lets users track expenses, upload bank statements (CSV), and view analytics. The backend is Django REST with JWT auth and PostgreSQL; the frontend is React (Vite) with charts and JWT in localStorage.
 
 ---
 
