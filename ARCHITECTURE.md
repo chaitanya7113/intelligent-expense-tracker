@@ -10,21 +10,21 @@ The **Intelligent Expense Tracker** is a full-stack application that lets users 
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                         FRONTEND (React + Vite)                          │
+│                         FRONTEND (React + Vite)                         │
 │  Login │ Register │ Dashboard │ Add Expense │ Expense List │ Analytics  │
-│  Axios + JWT (localStorage) │ Chart.js/Recharts                           │
+│  Axios + JWT (localStorage) │ Chart.js/Recharts                         │
 └─────────────────────────────────────────────────────────────────────────┘
                                     │
                                     │ HTTPS / REST API
                                     ▼
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                    BACKEND (Django + DRF)                                │
-│  JWT Auth │ Expenses API │ Analytics │ Statement Upload │ Categorization │
+│                    BACKEND (Django + DRF)                               │
+│  JWT Auth │ Expenses API │ Analytics │ Statement Upload │ Categorization│
 └─────────────────────────────────────────────────────────────────────────┘
                                     │
                                     ▼
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                         PostgreSQL                                       │
+│                         PostgreSQL                                      │
 └─────────────────────────────────────────────────────────────────────────┘
 ```
 

@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { auth } from '../api/endpoints'
 
+
 export default function Login() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -27,7 +28,7 @@ export default function Login() {
   }
 
   return (
-    <div className="container" style={{ maxWidth: 420, margin: '4rem auto', padding: '2rem' }}>
+    <div className="container " style={{ maxWidth: 420, margin: '4rem auto', padding: '2rem' }}>
       <div className="card">
         <h1 className="page-title" style={{ marginBottom: '1.5rem' }}>Login</h1>
         <form onSubmit={handleSubmit}>

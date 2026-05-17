@@ -12,23 +12,39 @@ logger = logging.getLogger(__name__)
 class AnalyticsService:
     @staticmethod
     def monthly_summary(user: User, year: int = None, month: int = None) -> dict:
-        qs = Expense.objects.filter(user=user)
-        if year is not None:
-            qs = qs.filter(date__year=year)
-        if month is not None:
-            qs = qs.filter(date__month=month)
-        total = qs.aggregate(total=Sum("amount"))["total"] or 0
+
+        now = timezone.now()
+
+        year = year or now.year
+        month = month or now.month
+
+        qs = Expense.objects.filter(
+            user=user,
+            date__year=year,
+            date__month=month
+        )
+
+        # total = qs.aggregate(total=Sum("amount"))["total"] or 0
+        expense_qs=qs.filter(type=Expense.Type.EXPENSE)
+        income_qs=qs.filter(type=Expense.Type.INCOME)
+
+        total_spending=expense_qs.aggregate(total=Sum("amount"))["total"] or 0
+        total_income=income_qs.aggregate(total=Sum("amount"))["total"] or 0
+
         return {
             "year": year or timezone.now().year,
             "month": month or timezone.now().month,
-            "total_spending": float(total),
-            "count": qs.count(),
+            "total_spending": float(total_spending),
+            "total_income": float(total_income),
+            "net": float(total_income - total_spending),
+            "count_expenses": expense_qs.count(),
+            "count_incomes": income_qs.count()
         }
 
     @staticmethod
     def category_breakdown(user: User, year: int = None, month: int = None) -> list:
         from django.db.models import Count
-        qs = Expense.objects.filter(user=user)
+        qs = Expense.objects.filter(user=user,type=Expense.Type.EXPENSE)
         if year is not None:
             qs = qs.filter(date__year=year)
         if month is not None:
@@ -57,7 +73,7 @@ class AnalyticsService:
             d = now - relativedelta(months=i)
             d = d.replace(day=1)
             total = (
-                Expense.objects.filter(user=user, date__year=d.year, date__month=d.month).aggregate(
+                Expense.objects.filter(user=user, type=Expense.Type.EXPENSE,date__year=d.year, date__month=d.month).aggregate(
                     total=Sum("amount")
                 )["total"]
                 or 0

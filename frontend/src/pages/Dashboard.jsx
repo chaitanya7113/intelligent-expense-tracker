@@ -20,18 +20,40 @@ export default function Dashboard() {
   if (error) return <div className="container"><p className="error-msg">{error}</p></div>
 
   const total = summary?.total_spending ?? 0
-  const count = summary?.count ?? 0
+  const count = summary?.count_expenses ?? 0
+
+  const income = summary?.total_income ?? 0
+  const net = summary?.net ?? 0
+  const incomeCount = summary?.count_incomes ?? 0
 
   return (
     <div className="container">
-      <h1 className="page-title">Dashboard</h1>
+      <h1 className="page-title ">Dashboard</h1>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: '1rem' }}>
         <div className="card">
           <div style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '0.25rem' }}>This month</div>
           <div style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--accent)' }}>
-            {total.toLocaleString()}
+            {new Intl.NumberFormat('en-IN', {
+              style: 'currency',
+              currency: 'INR',
+              maximumFractionDigits: 0,
+            }).format(total)}
           </div>
           <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>{count} expenses</div>
+        </div>
+        <div className="card">
+          <div style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '0.25rem' }}>Income (this month)</div>
+          <div style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--accent)' }}>
+            {new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(income)}
+          </div>
+          <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>{incomeCount} incomes</div>
+        </div>
+
+        <div className="card">
+          <div style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '0.25rem' }}>Net (this month)</div>
+          <div style={{ fontSize: '1.75rem', fontWeight: 700 }}>
+            {new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(net)}
+          </div>
         </div>
         <div className="card">
           <Link to="/expenses/add" className="btn btn-primary" style={{ display: 'inline-block' }}>Add Expense</Link>

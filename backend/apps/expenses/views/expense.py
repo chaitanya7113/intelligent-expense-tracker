@@ -19,7 +19,16 @@ class ExpenseListCreateView(APIView):
         date_to = request.query_params.get("date_to")
         category = request.query_params.get("category")
         category_id = int(category) if category and category.isdigit() else None
-        qs = ExpenseService.list_for_user(user, date_from=date_from, date_to=date_to, category_id=category_id)
+        tx_type = request.query_params.get("type")  # INCOME / EXPENSE
+
+        qs = ExpenseService.list_for_user(
+            user,
+            date_from=date_from,
+            date_to=date_to,
+            category_id=category_id,
+            type=tx_type,
+        )
+
         from rest_framework.pagination import PageNumberPagination
         paginator = PageNumberPagination()
         page = paginator.paginate_queryset(qs, request)
@@ -30,8 +39,12 @@ class ExpenseListCreateView(APIView):
         serializer = ExpenseSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         data = serializer.validated_data
+
+        tx_type = data.get("type", Expense.Type.EXPENSE)
+
         expense = ExpenseService.create(
             user=request.user,
+            type=tx_type,
             amount=data["amount"],
             date=data["date"],
             category_id=data.get("category").id if data.get("category") else None,

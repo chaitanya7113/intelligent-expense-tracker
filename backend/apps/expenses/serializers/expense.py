@@ -4,12 +4,13 @@ from apps.categories.models import Category
 
 
 class ExpenseSerializer(serializers.ModelSerializer):
+    type = serializers.ChoiceField(choices=Expense.Type.choices, required=False)
     category_name = serializers.CharField(source="category.name", read_only=True)
 
     class Meta:
         model = Expense
-        fields = ("id", "amount", "date", "category", "category_name", "description", "created_at", "updated_at")
-        read_only_fields = ("id", "created_at", "updated_at")
+        fields = ("id","type", "amount", "date", "category", "category_name", "description", "created_at", "updated_at")
+        read_only_fields = ("id", "type","created_at", "updated_at")
 
     def validate_category(self, value):
         if value is not None and not Category.objects.filter(pk=value.pk).exists():
@@ -18,8 +19,9 @@ class ExpenseSerializer(serializers.ModelSerializer):
 
 
 class ExpenseListSerializer(serializers.ModelSerializer):
+    
     category_name = serializers.CharField(source="category.name", read_only=True)
 
     class Meta:
         model = Expense
-        fields = ("id", "amount", "date", "category", "category_name", "description", "created_at", "updated_at")
+        fields = ("id","type", "amount", "date", "category", "category_name", "description", "created_at", "updated_at")

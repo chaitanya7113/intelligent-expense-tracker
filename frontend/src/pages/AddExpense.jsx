@@ -79,7 +79,9 @@ export default function AddExpense() {
             {loading ? 'Saving...' : 'Add Expense'}
           </button>
         </form>
+        
       </div>
     </div>
+    
   )
 }

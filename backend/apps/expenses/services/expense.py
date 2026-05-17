@@ -16,6 +16,7 @@ class ExpenseService:
         date_from=None,
         date_to=None,
         category_id=None,
+        type=None
     ) -> QuerySet:
         qs = Expense.objects.filter(user=user).select_related("category")
         if date_from:
@@ -24,12 +25,15 @@ class ExpenseService:
             qs = qs.filter(date__lte=date_to)
         if category_id is not None:
             qs = qs.filter(category_id=category_id)
+        if type in (Expense.Type.EXPENSE, Expense.Type.INCOME):
+            qs = qs.filter(type=type)
         return qs.order_by("-date", "-created_at")
 
     @staticmethod
-    def create(user: User, amount: Decimal, date, category_id=None, description: str = "") -> Expense:
+    def create(user: User, amount: Decimal, date, category_id=None, type: str = "EXPENSE", description: str = "") -> Expense:
         expense = Expense.objects.create(
             user=user,
+            type=type,
             amount=amount,
             date=date,
             category_id=category_id,
@@ -40,10 +44,15 @@ class ExpenseService:
 
     @staticmethod
     def update(expense: Expense, **kwargs) -> Expense:
+        updated_fields = []
         for key, value in kwargs.items():
             if hasattr(expense, key):
                 setattr(expense, key, value)
-        expense.save(update_fields=list(kwargs.keys()))
+                updated_fields.append(key)
+
+        if updated_fields:
+            expense.save(update_fields=updated_fields)
+
         logger.info("Expense updated: id=%s", expense.id)
         return expense
 
