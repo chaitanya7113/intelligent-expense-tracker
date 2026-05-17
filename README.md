@@ -107,13 +107,5 @@ intelligent-expense-tracker/
 
 ---
 
-## 📸 Screenshots
 
-<!-- Uncomment and add your screenshots below -->
-<!--
-![Dashboard Screenshot](screenshots/dashboard.png)
-![Expense Entry](screenshots/entry.png)
--->
-
----
 
