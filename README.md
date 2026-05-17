@@ -61,13 +61,11 @@ DEBUG=True
 
 ### 3. Setup the Frontend (JavaScript)
 
-If there’s a separate frontend folder (for React/Vue/Angular):
+If there’s a separate frontend folder (for React):
 
 ```bash
 cd frontend
 npm install
-# or
-yarn install
 ```
 
 **Note:** If frontend and backend are in a monorepo or together, adjust paths accordingly.
@@ -84,11 +82,7 @@ python manage.py runserver
 nom run dev
 ```
 
-### 5. Access the Application
 
-Visit [http://localhost:8000](http://localhost:8000) or the port shown in your terminal.
-
----
 
 ## 🗂️ Project Structure
 
@@ -110,7 +104,6 @@ intelligent-expense-tracker/
 ├── README.md
 └── ...
 ```
-_Adjust folder names/structure as per your implementation._
 
 ---
 
@@ -124,27 +117,3 @@ _Adjust folder names/structure as per your implementation._
 
 ---
 
-## 🙌 Contributing
-
-Contributions are welcome!
-
-1. Fork the repo and create your branch:
-   ```bash
-   git checkout -b feature/new-feature
-   ```
-2. Commit your changes and push:
-   ```bash
-   git commit -m "Add new feature"
-   git push origin feature/new-feature
-   ```
-3. Open a Pull Request describing your changes.
-
----
-
-## 📄 License
-
-MIT License. See [LICENSE](LICENSE) for details.
-
----
-
-**Made with ❤️ by [chaitanya7113](https://github.com/chaitanya7113)**
