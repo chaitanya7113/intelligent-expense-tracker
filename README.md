@@ -1,4 +1,4 @@
-# Intelligent Expense Tracker
+# PocketLens Expense Tracker
 
 Track your expenses intelligently, analyze spending habits, and make smarter financial decisions!  
 This open-source application leverages AI-driven insights to give you a clear view of your finances.
